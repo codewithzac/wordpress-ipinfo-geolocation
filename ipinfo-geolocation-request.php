@@ -7,6 +7,8 @@ function ipinfo_request() {
   $anonymise = $options['ipinfo_geolocation_anonymise']; // Anonymise IP addresses
   $priority = $options['ipinfo_geolocation_priority']; // Priority
   $token = $options['ipinfo_geolocation_token'];
+  $urlparts = wp_parse_url(home_url());
+  $domain = $urlparts['host'];
 
   // First, get the IP address
   // https://stackoverflow.com/a/26261699
@@ -88,7 +90,7 @@ function ipinfo_request() {
       }
     }
     // Turn $geoip into a cookie
-    setcookie('geoip', json_encode( $geoip ), strtotime('+1 year'), '/');
+    setcookie('geoip', json_encode( $geoip ), strtotime('+1 year'), '/', $domain);
   }
   ?>
 
